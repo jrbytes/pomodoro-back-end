@@ -23,4 +23,15 @@ projectsRouter.post(
 
 projectsRouter.get('/', projectsController.index)
 
+projectsRouter.patch(
+  '/:id',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      color: Joi.string().required(),
+    },
+  }),
+  projectsController.update,
+)
+
 export default projectsRouter
