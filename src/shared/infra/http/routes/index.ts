@@ -6,6 +6,7 @@ import passwordRouter from '@modules/users/infra/http/routes/password.routes'
 import profileRouter from '@modules/users/infra/http/routes/profile.routes'
 
 import projectsRouter from '@modules/projects/infra/http/routes/projects.routes'
+import tasksRouter from '@modules/tasks/infra/http/routes/tasks.routes'
 
 const routes = Router()
 
@@ -15,5 +16,6 @@ routes.use('/password', passwordRouter)
 routes.use('/profile', profileRouter)
 
 routes.use('/projects', projectsRouter)
+routes.use('/tasks', tasksRouter)
 
 export default routes

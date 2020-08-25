@@ -15,6 +15,9 @@ import NotificationsRepository from '@modules/notifications/infra/typeorm/reposi
 import IProjectsRepository from '@modules/projects/repositories/IProjectsRepository'
 import ProjectsRepository from '@modules/projects/infra/typeorm/repositories/ProjectsRepository'
 
+import ITasksRepository from '@modules/tasks/repositories/ITasksRepository'
+import TasksRepository from '@modules/tasks/infra/typeorm/repositories/TasksRepository'
+
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
@@ -33,4 +36,9 @@ container.registerSingleton<INotificationsRepository>(
 container.registerSingleton<IProjectsRepository>(
   'ProjectsRepository',
   ProjectsRepository,
+)
+
+container.registerSingleton<ITasksRepository>(
+  'TasksRepository',
+  TasksRepository,
 )
