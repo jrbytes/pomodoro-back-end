@@ -1,9 +1,11 @@
 import AppError from '@shared/errors/AppError'
 
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider'
 import FakeProjectsRepository from '../repositories/fakes/FakeProjectsRepository'
 import CreateProjectService from './CreateProjectService'
 import UpdateProjectService from './UpdateProjectService'
 
+let fakeCacheProvider: FakeCacheProvider
 let fakeProjectsRepository: FakeProjectsRepository
 let createProject: CreateProjectService
 let updateProject: UpdateProjectService
@@ -11,9 +13,16 @@ let updateProject: UpdateProjectService
 describe('CreateProjects', () => {
   beforeEach(() => {
     fakeProjectsRepository = new FakeProjectsRepository()
+    fakeCacheProvider = new FakeCacheProvider()
 
-    createProject = new CreateProjectService(fakeProjectsRepository)
-    updateProject = new UpdateProjectService(fakeProjectsRepository)
+    createProject = new CreateProjectService(
+      fakeProjectsRepository,
+      fakeCacheProvider,
+    )
+    updateProject = new UpdateProjectService(
+      fakeProjectsRepository,
+      fakeCacheProvider,
+    )
   })
 
   it('should be able to update a project', async () => {

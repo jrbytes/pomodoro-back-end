@@ -14,7 +14,7 @@ class FakeProjectsRepository implements IProjectsRepository {
     return findProject
   }
 
-  public async findAllById(user_id: string): Promise<Project[]> {
+  public async findAllProjects(user_id: string): Promise<Project[]> {
     const findById = this.projects.filter(
       projects => projects.user_id === user_id,
     )

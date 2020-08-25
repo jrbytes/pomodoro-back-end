@@ -18,7 +18,7 @@ class ProjectsRepository implements IProjectsRepository {
     return project
   }
 
-  public async findAllById(id: string): Promise<Project[]> {
+  public async findAllProjects(id: string): Promise<Project[]> {
     const projects = await this.ormRepository.find({
       where: { user_id: id },
     })

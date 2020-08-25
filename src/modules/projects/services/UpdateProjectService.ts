@@ -1,6 +1,7 @@
 import { injectable, inject } from 'tsyringe'
 
 import Project from '../infra/typeorm/entities/Project'
+import ICacheProvider from '@shared/container/providers/CacheProvider/models/ICacheProvider'
 import IProjectsRepository from '../repositories/IProjectsRepository'
 import AppError from '@shared/errors/AppError'
 
@@ -16,6 +17,9 @@ class UpdateProjectService {
   constructor(
     @inject('ProjectsRepository')
     private projectsRepository: IProjectsRepository,
+
+    @inject('CacheProvider')
+    private cacheProvider: ICacheProvider,
   ) {}
 
   public async execute({
@@ -33,6 +37,8 @@ class UpdateProjectService {
     Object.assign(project, { name, color, user_id })
 
     const updatedProject = await this.projectsRepository.save(project)
+
+    await this.cacheProvider.invalidate(`projects-list:${user_id}`)
 
     return updatedProject
   }
