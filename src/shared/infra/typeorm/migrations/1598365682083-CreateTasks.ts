@@ -29,7 +29,7 @@ export class CreateTasks1598365682083 implements MigrationInterface {
           {
             name: 'project_id',
             type: 'uuid',
-            default: true,
+            isNullable: true,
           },
           {
             name: 'created_at',
@@ -46,7 +46,7 @@ export class CreateTasks1598365682083 implements MigrationInterface {
     )
 
     await queryRunner.createForeignKey(
-      'projects',
+      'tasks',
       new TableForeignKey({
         name: 'TaskProject',
         columnNames: ['project_id'],
