@@ -1,3 +1,5 @@
+import { classToClass } from 'class-transformer'
+
 import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider'
 import FakeTasksRepository from '../repositories/fakes/FakeTasksRepository'
 import CreateTaskService from './CreateTaskService'
@@ -46,20 +48,27 @@ describe('ListTasks', () => {
   })
 
   it('should be able verify if tasks exists in cache', async () => {
-    const task1 = await createTask.execute({
-      name: 'Tarefa 1',
+    const project1 = await createTask.execute({
+      name: 'Desenvolvimento',
       project_id: 'id-identification',
     })
 
-    const task2 = await createTask.execute({
-      name: 'Tarefa 2',
+    const project2 = await createTask.execute({
+      name: 'Estudo',
       project_id: 'id-identification',
     })
 
-    const tasks = await listTasksService.execute({
+    const projects = [project1, project2]
+
+    await fakeCacheProvider.save(
+      `tasks-list:id-identification`,
+      classToClass(projects),
+    )
+
+    const listProjects = await listTasksService.execute({
       project_id: 'id-identification',
     })
 
-    expect(tasks).toEqual([task1, task2])
+    expect(listProjects).toEqual([project1, project2])
   })
 })

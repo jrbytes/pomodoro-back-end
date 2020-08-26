@@ -1,3 +1,5 @@
+import { classToClass } from 'class-transformer'
+
 import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider'
 import FakeProjectsRepository from '../repositories/fakes/FakeProjectsRepository'
 import CreateProjectService from './CreateProjectService'
@@ -51,22 +53,29 @@ describe('ListProjects', () => {
   })
 
   it('should be able verify if project exists in cache', async () => {
-    const projects1 = await createProject.execute({
+    const project1 = await createProject.execute({
       name: 'Desenvolvimento',
       color: 'black',
       user_id: 'id-identification',
     })
 
-    const projects2 = await createProject.execute({
-      name: 'Desenvolvimento',
-      color: 'black',
+    const project2 = await createProject.execute({
+      name: 'Estudo',
+      color: 'gray',
       user_id: 'id-identification',
     })
 
-    const projects = await listProjectsService.execute({
+    const projects = [project1, project2]
+
+    await fakeCacheProvider.save(
+      `projects-list:id-identification`,
+      classToClass(projects),
+    )
+
+    const listProjects = await listProjectsService.execute({
       user_id: 'id-identification',
     })
 
-    expect(projects).toEqual([projects1, projects2])
+    expect(listProjects).toEqual([project1, project2])
   })
 })
