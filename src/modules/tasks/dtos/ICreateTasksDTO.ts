@@ -1,5 +1,5 @@
 export default interface ICreateTasksDTO {
   name: string
-  realized_pomo: number
+  realized_pomos: number
   project_id: string
 }

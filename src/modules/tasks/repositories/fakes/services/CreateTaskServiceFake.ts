@@ -18,6 +18,7 @@ class CreateTaskService {
   public async execute({ name, project_id }: IRequest): Promise<Task> {
     const task = await this.tasksRepository.create({
       name,
+      realized_pomos: 0,
       project_id,
     })
 

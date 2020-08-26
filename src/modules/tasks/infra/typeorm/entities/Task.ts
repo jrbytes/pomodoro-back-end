@@ -18,7 +18,7 @@ class Task {
   name: string
 
   @Column()
-  realized_pomos: string
+  realized_pomos: number
 
   @Column()
   project_id: string
