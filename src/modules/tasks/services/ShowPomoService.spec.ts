@@ -1,7 +1,8 @@
 import FakeTasksRepository from '../repositories/fakes/FakeTasksRepository'
 import ShowPomoService from './ShowPomoService'
-
 import CreateTaskServiceFake from '../repositories/fakes/services/CreateTaskServiceFake'
+
+import AppError from '@shared/errors/AppError'
 
 let fakeTasksRepository: FakeTasksRepository
 let showPomoService: ShowPomoService
@@ -28,8 +29,8 @@ describe('ShowPomo', () => {
   })
 
   it('not should be able to show pomo', async () => {
-    const show = await showPomoService.execute({ id: 'invalid-id' })
-
-    expect(show).toEqual(undefined)
+    await expect(
+      showPomoService.execute({ id: 'invalid-id' }),
+    ).rejects.toBeInstanceOf(AppError)
   })
 })
