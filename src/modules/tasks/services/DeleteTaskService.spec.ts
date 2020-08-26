@@ -10,7 +10,7 @@ let fakeTasksRepository: FakeTasksRepository
 let createTask: CreateTaskService
 let deleteTask: DeleteTaskService
 
-describe('UpdateTask', () => {
+describe('DeleteTask', () => {
   beforeEach(() => {
     fakeTasksRepository = new FakeTasksRepository()
     fakeCacheProvider = new FakeCacheProvider()
