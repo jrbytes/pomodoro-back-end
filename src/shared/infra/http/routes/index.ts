@@ -7,6 +7,7 @@ import profileRouter from '@modules/users/infra/http/routes/profile.routes'
 
 import projectsRouter from '@modules/projects/infra/http/routes/projects.routes'
 import tasksRouter from '@modules/tasks/infra/http/routes/tasks.routes'
+import pomosRouter from '@modules/tasks/infra/http/routes/pomos.routes'
 
 const routes = Router()
 
@@ -17,5 +18,6 @@ routes.use('/profile', profileRouter)
 
 routes.use('/projects', projectsRouter)
 routes.use('/tasks', tasksRouter)
+routes.use('/pomos', pomosRouter)
 
 export default routes

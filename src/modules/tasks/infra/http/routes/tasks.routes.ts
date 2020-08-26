@@ -32,4 +32,6 @@ tasksRouter.patch(
   tasksController.update,
 )
 
+tasksRouter.delete('/:id', tasksController.delete)
+
 export default tasksRouter

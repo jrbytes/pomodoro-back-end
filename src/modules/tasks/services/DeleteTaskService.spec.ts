@@ -3,12 +3,12 @@ import AppError from '@shared/errors/AppError'
 import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider'
 import FakeTasksRepository from '../repositories/fakes/FakeTasksRepository'
 import CreateTaskService from './CreateTaskService'
-import UpdateTaskService from './UpdateTaskService'
+import DeleteTaskService from './DeleteTaskService'
 
 let fakeCacheProvider: FakeCacheProvider
 let fakeTasksRepository: FakeTasksRepository
 let createTask: CreateTaskService
-let updateTask: UpdateTaskService
+let deleteTask: DeleteTaskService
 
 describe('UpdateTask', () => {
   beforeEach(() => {
@@ -16,31 +16,26 @@ describe('UpdateTask', () => {
     fakeCacheProvider = new FakeCacheProvider()
 
     createTask = new CreateTaskService(fakeTasksRepository, fakeCacheProvider)
-    updateTask = new UpdateTaskService(fakeTasksRepository, fakeCacheProvider)
+    deleteTask = new DeleteTaskService(fakeTasksRepository, fakeCacheProvider)
   })
 
-  it('should be able to update a task', async () => {
+  it('should be able to delete a task', async () => {
     const task = await createTask.execute({
       name: 'Tarefa 1',
       project_id: 'id-identification',
     })
 
-    const updatedTask = await updateTask.execute({
+    const deletedTask = await deleteTask.execute({
       id: task.id,
-      name: 'Tarefa One',
-      project_id: 'id-identification',
     })
 
-    expect(updatedTask).toEqual(expect.objectContaining({ name: 'Tarefa One' }))
-    expect(task).not.toEqual(expect.objectContaining({ name: 'Tarefa 1' }))
+    expect(deletedTask).toEqual([])
   })
 
   it('should be able verify if task exists', async () => {
     await expect(
-      updateTask.execute({
+      deleteTask.execute({
         id: '',
-        name: 'Estudo',
-        project_id: 'id-identification',
       }),
     ).rejects.toBeInstanceOf(AppError)
   })

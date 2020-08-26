@@ -39,6 +39,12 @@ class FakeTasksRepository implements ITasksRepository {
 
     return task
   }
+
+  public async delete(task: Task): Promise<Task | {}> {
+    const findTask = this.tasks.filter(findTask => findTask.id !== task.id)
+
+    return findTask
+  }
 }
 
 export default FakeTasksRepository

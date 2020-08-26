@@ -6,4 +6,5 @@ export default interface ITasksRepository {
   findById(id: string): Promise<Task | undefined>
   create(data: ICreateTasksDTO): Promise<Task>
   save(task: Task): Promise<Task>
+  delete(task: Task): Promise<Task | {}>
 }

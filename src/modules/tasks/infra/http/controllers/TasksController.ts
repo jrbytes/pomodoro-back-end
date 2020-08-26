@@ -4,8 +4,9 @@ import { container } from 'tsyringe'
 import CreateTaskService from '@modules/tasks/services/CreateTaskService'
 import ListTasksService from '@modules/tasks/services/ListTasksService'
 import UpdateTaskService from '@modules/tasks/services/UpdateTaskService'
+import DeleteTaskService from '@modules/tasks/services/DeleteTaskService'
 
-export default class ProjectsController {
+export default class TasksController {
   public async create(request: Request, response: Response): Promise<Response> {
     const project_id = request.params.id
     const { name } = request.body
@@ -42,6 +43,18 @@ export default class ProjectsController {
       id,
       name,
       project_id,
+    })
+
+    return response.json(task)
+  }
+
+  public async delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params
+
+    const deleteTask = container.resolve(DeleteTaskService)
+
+    const task = await deleteTask.execute({
+      id,
     })
 
     return response.json(task)
