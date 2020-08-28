@@ -21,6 +21,9 @@ class Task {
   realized_pomos: number
 
   @Column()
+  completed: boolean
+
+  @Column()
   project_id: string
 
   @ManyToOne(() => Project)

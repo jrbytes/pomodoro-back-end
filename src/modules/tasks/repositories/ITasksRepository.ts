@@ -3,6 +3,7 @@ import ICreateTasksDTO from '../dtos/ICreateTasksDTO'
 
 export default interface ITasksRepository {
   findAllTasks(id: string): Promise<Task[]>
+  findCompletedTasks(id: string): Promise<Task[]>
   findById(id: string): Promise<Task | undefined>
   create(data: ICreateTasksDTO): Promise<Task>
   save(task: Task): Promise<Task>

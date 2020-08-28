@@ -27,6 +27,15 @@ class TasksRepository implements ITasksRepository {
     return tasks
   }
 
+  public async findCompletedTasks(id: string): Promise<Task[]> {
+    const tasks = await this.ormRepository.find({
+      where: { project_id: id, completed: true },
+      order: { created_at: 'DESC' },
+    })
+
+    return tasks
+  }
+
   public async create(taskData: ICreateTasksDTO): Promise<Task> {
     const task = this.ormRepository.create(taskData)
 

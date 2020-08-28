@@ -22,10 +22,18 @@ class FakeTasksRepository implements ITasksRepository {
     return findByProjectId
   }
 
+  public async findCompletedTasks(project_id: string): Promise<Task[]> {
+    const findByProjectId = this.tasks.filter(
+      tasks => tasks.project_id === project_id && tasks.completed === true,
+    )
+
+    return findByProjectId
+  }
+
   public async create(taskData: ICreateTasksDTO): Promise<Task> {
     const task = new Task()
 
-    Object.assign(task, { id: uuid() }, taskData)
+    Object.assign(task, { id: uuid(), completed: true }, taskData)
 
     this.tasks.push(task)
 
