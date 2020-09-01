@@ -33,6 +33,7 @@ class UpdateTaskService {
     const updatedCompletedTask = await this.tasksRepository.save(task)
 
     await this.cacheProvider.invalidate(`tasks-completed-list:${project_id}`)
+    await this.cacheProvider.invalidate(`tasks-list:${project_id}`)
 
     return updatedCompletedTask
   }
