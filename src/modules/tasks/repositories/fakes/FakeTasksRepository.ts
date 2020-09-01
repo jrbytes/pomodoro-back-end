@@ -16,7 +16,7 @@ class FakeTasksRepository implements ITasksRepository {
 
   public async findAllTasks(project_id: string): Promise<Task[]> {
     const findByProjectId = this.tasks.filter(
-      tasks => tasks.project_id === project_id,
+      tasks => tasks.project_id === project_id && tasks.completed === false,
     )
 
     return findByProjectId
@@ -33,7 +33,7 @@ class FakeTasksRepository implements ITasksRepository {
   public async create(taskData: ICreateTasksDTO): Promise<Task> {
     const task = new Task()
 
-    Object.assign(task, { id: uuid(), completed: true }, taskData)
+    Object.assign(task, { id: uuid(), completed: false }, taskData)
 
     this.tasks.push(task)
 
