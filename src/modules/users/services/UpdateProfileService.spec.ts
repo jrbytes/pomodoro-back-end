@@ -30,6 +30,9 @@ describe('UpdateProfile', () => {
       user_id: user.id,
       name: 'John Trê',
       email: 'johntre@example.com',
+      default_minute: 1,
+      setting_progress_bar: true,
+      theme: 'dark',
     })
 
     expect(updatedUser.name).toBe('John Trê')
@@ -42,6 +45,9 @@ describe('UpdateProfile', () => {
         user_id: 'non-existing-user-id',
         name: 'Test',
         email: 'test@example.com',
+        default_minute: 1,
+        setting_progress_bar: true,
+        theme: 'dark',
       }),
     ).rejects.toBeInstanceOf(AppError)
   })
@@ -64,6 +70,9 @@ describe('UpdateProfile', () => {
         user_id: user.id,
         name: 'John Doe',
         email: 'johndoe@example.com',
+        default_minute: 1,
+        setting_progress_bar: true,
+        theme: 'dark',
       }),
     ).rejects.toBeInstanceOf(AppError)
   })
@@ -79,6 +88,9 @@ describe('UpdateProfile', () => {
       user_id: user.id,
       name: 'John Trê',
       email: 'johntre@example.com',
+      default_minute: 1,
+      setting_progress_bar: true,
+      theme: 'dark',
       old_password: '123456',
       password: '123123',
     })
@@ -99,6 +111,9 @@ describe('UpdateProfile', () => {
         name: 'John Trê',
         email: 'johntre@example.com',
         password: '123123',
+        default_minute: 1,
+        setting_progress_bar: true,
+        theme: 'dark',
       }),
     ).rejects.toBeInstanceOf(AppError)
   })
@@ -115,6 +130,9 @@ describe('UpdateProfile', () => {
         user_id: user.id,
         name: 'John Trê',
         email: 'johntre@example.com',
+        default_minute: 1,
+        setting_progress_bar: true,
+        theme: 'dark',
         old_password: 'wrong-old-password',
         password: '123123',
       }),

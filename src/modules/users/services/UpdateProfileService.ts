@@ -10,6 +10,9 @@ interface IRequest {
   user_id: string
   name: string
   email: string
+  default_minute: number
+  setting_progress_bar: boolean
+  theme: string
   old_password?: string
   password?: string
 }
@@ -28,6 +31,9 @@ class UpdateProfileService {
     user_id,
     name,
     email,
+    default_minute,
+    setting_progress_bar,
+    theme,
     old_password,
     password,
   }: IRequest): Promise<User> {
@@ -45,6 +51,9 @@ class UpdateProfileService {
 
     user.name = name
     user.email = email
+    user.default_minute = default_minute
+    user.setting_progress_bar = setting_progress_bar
+    user.theme = theme
 
     if (password && !old_password) {
       throw new AppError(
